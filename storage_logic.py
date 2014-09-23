@@ -88,33 +88,39 @@ def energy_logic(demand_costs):
 
     for i in range(0,len(results['USAGE'])):
 
+        # If at the end of the time series, break out
         if i == len(results['USAGE'])-1:
-
             break
 
+        # Peak hours operation
         elif results['period'][i] == 'peak' or results['period'][i] == 'int':
 
-            # during peak, prefer to use out of battery
+            # If there is enough available in the battery, use it first
             if (results['storage_available'][i] - E_min) >= results['USAGE'][i]:
 
                 results = peak_battery_only(results, i)
 
+            # Otherwise, use up remainder in battery and then buy from grid
             else:
-
                 results = peak_battery_and_grid(results, i)
 
+        # Off-peak hours operation
         else:
 
+            # If the battery isn't full...
             if results['storage_available'][i] < storage_size_kWh:
 
+                # ... top off the battery if it is nearly full...
                 if storage_size_kWh - results['storage_available'][i] <= P_max_charge:
 
                     results = offpeak_store_to_cap(results, i)
 
+                # ... otherwise, charge as much as possible in one hour.
                 else:
 
                     results = offpeak_store_partial(results, i)
 
+            # If the battery is full, then it isn't necessary to purchase extra.
             else:
 
                 results = offpeak_battery_full(results, i)
