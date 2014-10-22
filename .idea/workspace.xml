@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb4f8474-a1c0-48e7-a47c-342c8cef573a" name="Default" comment="" />
+    <list default="true" id="eb4f8474-a1c0-48e7-a47c-342c8cef573a" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TOU_pricing_and_storage.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TOU_pricing_my_usage.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Untitled0.ipynb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/all_metrics_storage.csv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+    </list>
     <ignored path="demandside_storage.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
