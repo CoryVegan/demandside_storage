@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eb4f8474-a1c0-48e7-a47c-342c8cef573a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Daily_Energy_Purchased_13-July-2011.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Daily_Energy_State_13-July-2011.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/demand_cost.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/pydev_workspace/.project" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/results.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/storage_analysis.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TOU_pricing.py" afterPath="$PROJECT_DIR$/TOU_pricing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storage_logic.py" afterPath="$PROJECT_DIR$/storage_logic.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="eb4f8474-a1c0-48e7-a47c-342c8cef573a" name="Default" comment="" />
     <ignored path="demandside_storage.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
