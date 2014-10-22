@@ -2,8 +2,8 @@
 TOU_pricing.py
 
 TOU_pricing.elec_cost(df)
-params: df - Timestamped Pandas dataframe
-returns: 'weather' - Pandas dataframe, hourly weather data
+    params: df - Timestamped Pandas dataframe
+    returns: 'weather' - Pandas dataframe, hourly weather data
 
 Justin Elszasz 2014.09.12
 """
@@ -264,7 +264,7 @@ def main(plan, save):
 
         if save == True:
 
-            demand_costs.to_csv('demand_costs.csv')
+            demand_costs.to_csv(plan+'_demand_costs.csv')
 
         return demand_costs
 
