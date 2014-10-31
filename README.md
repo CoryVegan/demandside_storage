@@ -15,12 +15,15 @@ BGE time-of-use electricity pricing plans.
 
 ### Modules
 
-#### TOU_pricing.py
+#### TOU_pricing.py:
 Determines assigns peak, intermediate, and off-peak periods 
 
-#### storage_logic.py
+#### storage_logic.py:
 
-#### parameters.py
+#### parameters.py:
 
-### /notebooks
+#### analysis.py:
 
+### Notebooks
+
+#### analysis.ipynb: 

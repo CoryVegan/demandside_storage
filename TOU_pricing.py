@@ -1,9 +1,6 @@
 """
-TOU_pricing.py
-
-TOU_pricing.elec_cost(df)
-    params: df - Timestamped Pandas dataframe
-    returns: 'weather' - Pandas dataframe, hourly weather data
+Imports hourly Green Button sample data and determines season, BGE time-of-use period, 
+and cost of electricity at each hour.
 
 Justin Elszasz 2014.09.12
 """
@@ -27,7 +24,7 @@ def import_demand():
 
     # In the Green Button schema, the IntervalReading tag designates each reading
     # Each IntervalReading has a 'time' element with start and duration children
-    # 'Value' element is actual hourly usage in Watt-hours
+    # 'Value' element is actual hourly usage in Watt-hours  
 
     for i, intervalreading in enumerate(soup.find_all('intervalreading')):
         data_array[i,0]=intervalreading.value.get_text()
@@ -55,11 +52,8 @@ def TOU_period(df, plan):
     df['season'].ix[(df[np.in1d(df.index.month,summer_months)]).index] = 'summer'
 
     if  plan == 'R':
-
         df['period'] = np.zeros_like(df['USAGE'])
-
         df['period'] = 'offpeak'
-
         return df
 
     if plan == 'RL':
@@ -262,9 +256,7 @@ def main(plan, save):
         demand_periods = TOU_period(demand, plan)
         demand_costs = elec_cost(demand_periods, plan)
 
-        if save == True:
-
-            demand_costs.to_csv(plan+'_demand_costs.csv')
+        if save == True: demand_costs.to_csv(plan+'_demand_costs.csv')
 
         return demand_costs
 

@@ -1,53 +1,13 @@
 '''
-storage_logic.py
+The main() function below contains the actual logic.  Functions are called by the logic
+to calculate the actual state for each hour. 
 
-Calculates all energy flows and battery state based on time-of-use pricing schemes.
-
-peak_battery_only(results, i): called by energy_logic when there is enough storage available to meet
-    demand during peak hours.
-    params: results - Pandas dataframe from energy_logic function containing hourly usage, hourly period and
-                        associated cost, and all hourly energy flows
-            i - current hour index
-    returns: results - updated Pandas dataframe with energy flows at hour i and next hour available storage
-
-peak_battery_and_grid(results, i): called by energy_logic during peak hours when not enough battery to
-    meet demand at hour i.
-    params: results - Pandas dataframe from energy_logic function containing hourly usage, hourly period and
-                        associated cost, and all hourly energy flows
-            i - current hour index
-    returns: results - updated Pandas dataframe with energy flows at hour i and next hour available storage
-
-offpeak_store_to_cap(results, i): called by energy_logic during off-peak hours when storage is nearly full
-    and only needs topped off
-    params: results - Pandas dataframe from energy_logic function containing hourly usage, hourly period and
-                        associated cost, and all hourly energy flows
-            i - current hour index
-    returns: results - updated Pandas dataframe with energy flows at hour i and next hour available storage
-
-offpeak_store_partial(results, i): called by energy_logic function during off-peak hours to add as much energy
-    to battery as possible for hour i
-    params: results - Pandas dataframe from energy_logic function containing hourly usage, hourly period and
-                        associated cost, and all hourly energy flows
-            i - current hour index
-    returns: results - updated Pandas dataframe with energy flows at hour i and next hour available storage
-
-offpeak_battery_full(results, i): called by energy_logic function during off-peak hours when battery is full
-    params: results - Pandas dataframe from energy_logic function containing hourly usage, hourly period and
-                        associated cost, and all hourly energy flows
-            i - current hour index
-    returns: results - updated Pandas dataframe with energy flows at hour i and next hour available storage
-
-main(demand_costs): calculates all energy flows and battery state for each hour in a year
-    params: demand_costs - Pandas dataframe output from TOU_pricing.main() containing hourly time-of-use periods
-                            and associated price of electricity
-    returns: results - updated Pandas dataframe with energy flows and battery state at each hour over course of year
 
 Justin Elszasz, 10/3/2014
+Update 10/30/2014
 '''
 
-import pandas as pd
 import numpy as np
-import TOU_pricing
 
 
 def peak_battery_only(results, system_param, i):
@@ -111,6 +71,17 @@ def offpeak_battery_full(results, system_param, i):
     return results
 
 def main(demand_costs, system_param):
+    '''
+    Calculates all energy flows and battery state for each hour in a year.
+    
+    Args: 
+        demand_costs: Pandas dataframe output from TOU_pricing.main() containing hourly time-of-use periods,
+            seasons, and associated price of electricity
+    
+    Returns:
+        results: Pandas dataframe with energy flows and battery state at each hour over course of year
+
+    '''
 
     # initialize storage state and flows
     results = demand_costs
