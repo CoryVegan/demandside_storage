@@ -11,7 +11,10 @@ import numpy as np
 def import_demand():
     """
     Reads in an Green Button sample file in xml format and returns Pandas dataframe.
-    :return: demand_data: Timestamped Pandas dataframe containing hourly electricity usage from Green Button sample file
+    
+    Returns: 
+        demand_data: Timestamped Pandas dataframe containing hourly electricity usage 
+            from Green Button sample file
     """
 
     from bs4 import BeautifulSoup as bs
@@ -42,8 +45,14 @@ def TOU_period(df, plan):
 
     """
     Determines the period (peak, off-peak, or intermediate) for each hour
-    :param df: Pandas dataframe containing timestamped data
-    :return: df: Pandas dataframe with periods assigned
+    
+    Args:
+        df: Pandas dataframe containing timestamped data
+        plan: string must be 'R' (normal residential BGE plan), 'RL' (BGE TOU plan), 
+            or 'EV' (electric vehicle TOU plan)
+
+    Returns:
+        df: Pandas dataframe with periods assigned
     """
 
     summer_months = [6,7,8,9]

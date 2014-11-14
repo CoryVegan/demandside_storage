@@ -3,10 +3,10 @@ import TOU_pricing
 import storage_logic
 import pandas as pd
 import numpy as np
-import time
 
 reload(TOU_pricing)
 reload(storage_logic)
+
 
 
 def calc_annual_var_cost(results):
@@ -16,14 +16,15 @@ def calc_annual_var_cost(results):
     annual_var_cost = round(cost_peak.sum() + cost_offpeak.sum(),2)
     return annual_var_cost
 
-def calc_PBP(results, system_param):
+def calc_PBP(results, system_param, R_annual_cost):
 
-    results_R = storage_logic.main(TOU_pricing.main('R', False), system_param)
-    R_annual_cost = calc_annual_var_cost(results_R)
     PBP = (system_param['Inverter Cost'] + system_param['Storage Cost'] * system_param['Storage Size']) / (R_annual_cost - calc_annual_var_cost(results))
     return PBP
 
 def calc_metrics(results, system_param):
+
+    results_R = storage_logic.main(TOU_pricing.main('R', False), system_param)
+    R_annual_cost = np.sum(results_R['USAGE'] * results_R['cost'])
 
     total_kWh_purchased = results['grid_to_demand_peak'].sum() + results['grid_to_demand_offpeak'].sum() + results['grid_to_inverter'].sum()
     total_peak_demand = results['USAGE'][results['period']=='peak'].sum()
@@ -39,12 +40,12 @@ def calc_metrics(results, system_param):
         'Hours Battery Depleted' : results['USAGE'][results['storage_available']==results['storage_available'].min()].count(),
         'Annual System Eff' : results['USAGE'].sum() / total_kWh_purchased,
         'Annual Var Cost' : calc_annual_var_cost(results),
+        'Annual Savings' : R_annual_cost - calc_annual_var_cost(results),
+        '% Annual Cost Savings' : (R_annual_cost - calc_annual_var_cost(results)) / R_annual_cost,
         'Initial Cost' : system_param['Inverter Cost'] + system_param['Storage Cost'] * system_param['Storage Size'],
         'Peak kWh Shaved' : results['USAGE'][results['period']=='peak'].sum() - results['grid_to_demand_peak'].sum(),
         '% Peak kWh Shaved' : (results['USAGE'][results['period']=='peak'].sum() - results['grid_to_demand_peak'].sum()) / results['USAGE'][results['period']=='peak'].sum(),
-        'PBP' : calc_PBP(results, system_param)
-        #### ADD PBP HERE ####
-
+        'PBP' : calc_PBP(results, system_param, R_annual_cost)
         #'% Demand Served by Battery' : results['USAGE'][results['storage_to_inverter']>0].sum() / results['USAGE'].sum(), # not sure this is useful
     }
 
